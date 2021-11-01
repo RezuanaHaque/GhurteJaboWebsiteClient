@@ -1,19 +1,23 @@
-
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { useParams } from 'react-router';
+import UseAuth from '../../Hooks/UseAuth';
 
-
-
-const ManageOrderc = () => {
-    const { destinationID } = useParams()
+const Myorders = () => {
+    const { user } = UseAuth()
+    console.log(user);
     const [manageOrderList, setmanageOrderList] = useState([])
-    // const [OrderList, setOrderList] = useState([])
+    const [OrderList, setOrderList] = useState([])
     useEffect(() => {
         fetch("http://localhost:5000/manageOrder")
             .then(res => res.json())
             .then(data => setmanageOrderList(data))
     }, [])
+    useEffect(() => {
+        const orders = manageOrderList.filter
+            (order => order?.email == user?.email)
+        setOrderList(orders)
+    }, [manageOrderList])
+
 
     const handleDel = id => {
         console.log(id)
@@ -40,31 +44,31 @@ const ManageOrderc = () => {
         <div style={{ marginTop: '100px' }} >
 
             <Container>
-                <h1 className="text-center m-4">All Orders</h1>
+                <h1 className="text-center m-4">My Orders</h1>
                 <Row xs={12} md={4} lg={3} className="g-3">
                     {
-                        manageOrderList.map(place =>
+                        OrderList.map(order =>
                             <Col>
                                 <Card className="card"   style={{ width: '18rem' }}>
-                                    <div className=""><div><Card.Img variant="top" src={place.picture} style={{ width: "285px", height: "150px" }} fluid /></div>
+                                    <div className=""><div><Card.Img variant="top" src={order.picture} style={{ width: "285px", height: "150px" }} fluid /></div>
                                         <div className=""><Card.Body>
-                                            <Card.Title>{place.name}</Card.Title>
+                                            <Card.Title>{order.name}</Card.Title>
                                             <div className="d-flex justify-content-between fw-bold text-secondary">
-                                                <small><i className="fas fa-map-marker-alt"></i> {place.address}</small>
-                                                <small>{place.duration}</small>
+                                                <small><i className="fas fa-map-marker-alt"></i> {order.address}</small>
+                                                <small>{order.duration}</small>
                                             </div>
                                             <Card.Text>
-                                                <small className="text-secondary">{place.about}</small> <br />
-                                                <small className="fw-bold text-secondary">Price:  <span>{place.price}</span></small>
-                                                <small className="fw-bold text-secondary">Booked By: <span>{place.email}</span></small>
+                                                <small className="text-secondary">{order.about}</small> <br />
+                                                <small className="fw-bold text-secondary">Price:  <span>{order.price}</span></small> <br />
+                                                <small className="fw-bold text-secondary">Booked By: <span>{order.email}</span></small>
 
                                             </Card.Text>
-
-                                            <Button onClick={() => handleDel(place._id)} variant="info" className="w-100">Delete</Button>
+                                            <Button onClick={() => handleDel(order._id)} variant="info" className="w-100">Delete</Button>
+                                            {/* <Button onClick={() => handleDel(place._id)} variant="info" className="w-100">Delete</Button> */}
                                         </Card.Body></div></div>
-
                                 </Card>
-                            </Col>)
+                            </Col>
+                        )
                     }
 
                 </Row>
@@ -73,4 +77,4 @@ const ManageOrderc = () => {
     );
 };
 
-export default ManageOrderc;
+export default Myorders;

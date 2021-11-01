@@ -1,0 +1,26 @@
+
+.backImg {
+  position: relative;
+}
+.backImg:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("https://i.ibb.co/LCyDxfz/pngwing-com-1.png");
+  width: 100%;
+  height: 100%;
+  opacity : .6;
+  z-index: -1;
+}
+.card:hover {
+  /* transform:scale(1.1); */
+  box-shadow: 0 40px 60px -20px rgba(90, 201, 245, 0.775);
+  border: solid 2px rgba(67, 67, 67, 0.768);
+
+}
+/* .card:hover {
+  box-shadow: 0 40px 60px -20px rgba(12, 5, 62, 0.15);
+  z-index: 100;
+} */
