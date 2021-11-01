@@ -19,7 +19,7 @@ const Booknow = () => {
     const [singleservice, setSingleservice] = useState({});
     // const [destinationList, setDestinationList] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/places/${destinationID}`)
+        fetch(`https://floating-spire-72741.herokuapp.com/places/${destinationID}`)
             .then(res => res.json())
             .then(data => setSingleservice(data))
     }, [])
@@ -35,7 +35,7 @@ const handleBook=(index)=>{
         data.email= user.email
         // data.UserEmail= user?.UserEmail
         console.log(data);
-        axios.post('http://localhost:5000/manageOrder', data)
+        axios.post('https://floating-spire-72741.herokuapp.com/manageOrder', data)
         .then(function (response) {
           if(response.data.insertedId){
               alert('Package added successfully')

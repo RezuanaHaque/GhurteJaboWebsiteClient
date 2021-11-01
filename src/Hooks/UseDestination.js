@@ -3,7 +3,7 @@ import  { useEffect, useState } from 'react';
 const UseDestination = () => {
     const [destinationList,setDestinationList]=useState([])
     useEffect(()=>{
-        fetch("http://localhost:5000/places")
+        fetch("https://floating-spire-72741.herokuapp.com/places")
         .then(res=>res.json())
         .then(data=>setDestinationList(data))
     },[])

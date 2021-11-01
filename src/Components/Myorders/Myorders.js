@@ -8,7 +8,7 @@ const Myorders = () => {
     const [manageOrderList, setmanageOrderList] = useState([])
     const [OrderList, setOrderList] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/manageOrder")
+        fetch("https://floating-spire-72741.herokuapp.com/manageOrder")
             .then(res => res.json())
             .then(data => setmanageOrderList(data))
     }, [])
@@ -23,7 +23,7 @@ const Myorders = () => {
         console.log(id)
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/manageOrder/${id}`;
+            const url = `https://floating-spire-72741.herokuapp.com/manageOrder/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

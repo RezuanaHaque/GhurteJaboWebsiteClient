@@ -8,7 +8,7 @@ import { render } from 'react-dom';
 const Addservice = () => {
     const { register, handleSubmit,reset } = useForm();
     const onSubmit = data =>{
-        axios.post('http://localhost:5000/places', data)
+        axios.post('https://floating-spire-72741.herokuapp.com/places', data)
           .then(function (response) {
             if(response.data.insertedId){
                 alert('Package added successfully')
